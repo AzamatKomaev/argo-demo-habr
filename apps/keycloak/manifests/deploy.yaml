@@ -14,20 +14,29 @@ spec:
       labels:
         app: keycloak
     spec:
+      volumes:
+      - name: tls
+        secret:
+          secretName: keycloak-crt
+
       containers:
         - name: keycloak
           image: quay.io/keycloak/keycloak:25.0.5
           args: ["start-dev"]
           env:
-            - name: KEYCLOAK_ADMIN
-              value: "admin"
-            - name: KEYCLOAK_ADMIN_PASSWORD
-              value: "admin"
-            - name: KC_PROXY
-              value: "edge"
+          - name: KEYCLOAK_ADMIN
+            value: "admin"
+          - name: KEYCLOAK_ADMIN_PASSWORD
+            value: "admin"
+          - name: KC_PROXY
+            value: "edge"
           ports:
-            - name: http
-              containerPort: 8080
+          - name: http
+            containerPort: 8080
+          volumeMounts:
+          - name: foo
+            mountPath: "/etc/foo"
+            readOnly: true
           readinessProbe:
             httpGet:
               path: /realms/master
