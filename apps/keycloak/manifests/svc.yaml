@@ -8,8 +8,12 @@ spec:
   ports:
     - name: http
       port: 8080
-      nodePort: 31231
+      nodePort: 31230
       targetPort: 8080
+    - name: https
+      port: 9000
+      nodePort: 31231
+      targetPort: 9000
   selector:
     app: keycloak
   type: NodePort
