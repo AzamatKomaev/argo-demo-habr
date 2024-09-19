@@ -34,8 +34,8 @@ spec:
           - name: http
             containerPort: 8080
           volumeMounts:
-          - name: foo
-            mountPath: "/etc/foo"
+          - name: tls
+            mountPath: "/etc/keycloak/tls"
             readOnly: true
           readinessProbe:
             httpGet:
