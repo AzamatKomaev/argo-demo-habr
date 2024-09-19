@@ -39,13 +39,13 @@ spec:
 
           prometheusSpec:
             storageSpec: 
-            volumeClaimTemplate:
-              spec:
-                accessModes: ["ReadWriteOnce"]
-                resources:
-                  requests:
-                    storage: 10Gi
-
+              volumeClaimTemplate:
+                spec:
+                  accessModes: ["ReadWriteOnce"]
+                  resources:
+                    requests:
+                      storage: 10Gi
+          
   syncPolicy:
     automated:
       prune: true
