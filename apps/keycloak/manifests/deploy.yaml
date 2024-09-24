@@ -22,7 +22,7 @@ spec:
       containers:
         - name: keycloak
           image: quay.io/keycloak/keycloak:25.0.5
-          args: ["start-dev", "--hostname=keycloak.local", "--https-certificate-file=/etc/keycloak/tls/tls.crt", "--https-certificate-key-file=/etc/keycloak/tls/tls.key"]
+          args: ["start-dev", "--hostname=keycloak.default", "--https-certificate-file=/etc/keycloak/tls/tls.crt", "--https-certificate-key-file=/etc/keycloak/tls/tls.key"]
           env:
           - name: KEYCLOAK_ADMIN
             value: "admin"
