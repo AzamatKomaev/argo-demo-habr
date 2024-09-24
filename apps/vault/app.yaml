@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: vault
+    repoURL: registry-1.docker.io/azamatkomaev
+    path: .
+    targetRevision: 0.28.0
+    helm:
+      releaseName: vault
+      values: |
+        server:
+          ha:
+            enabled: true
+            replicas: 1
+
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: vault
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - Validate=true
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
+    - RespectIgnoreDifferences=true
+
+  ignoreDifferences:
+  - group: admissionregistration.k8s.io
+    kind: MutatingWebhookConfiguration
+    jqPathExpressions:
+    - '.webhooks[]?.clientConfig.caBundle'
