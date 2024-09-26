@@ -13,12 +13,12 @@ spec:
     helm:
       releaseName: vault
       values: |
-        extraEnvironmentVars:
-          VAULT_CACERT: /vault/userconfig/vault-server-cacerts/root_ca.crt
         global:
           enabled: true
           tlsDisable: false
         server:
+          extraEnvironmentVars:
+            VAULT_CACERT: /vault/userconfig/vault-server-cacerts/root_ca.crt
           volumes:
             - name: userconfig-vault-server-tls
               secret:
