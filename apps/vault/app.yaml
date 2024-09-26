@@ -13,6 +13,8 @@ spec:
     helm:
       releaseName: vault
       values: |
+        extraEnvironmentVars:
+          VAULT_CACERT: /vault/userconfig/vault-server-cacerts/root_ca.crt
         global:
           enabled: true
           tlsDisable: false
@@ -22,10 +24,17 @@ spec:
               secret:
                 defaultMode: 420
                 secretName: vault-tls
+            - name: userconfig-vault-server-tls-cacerts
+              secret:
+                defaultMode: 420
+                secretName: vault-tls-cacerts
 
           volumeMounts:
             - mountPath: /vault/userconfig/vault-server-tls
               name: userconfig-vault-server-tls
+              readOnly: true
+            - mountPath: /vault/userconfig/vault-server-cacerts
+              name: userconfig-vault-server-tls-cacerts
               readOnly: true
           service:
             type: NodePort
