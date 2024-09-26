@@ -43,3 +43,6 @@ spec:
             httpGet:
               path: /realms/master
               port: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
