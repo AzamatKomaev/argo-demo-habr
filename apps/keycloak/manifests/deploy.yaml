@@ -18,6 +18,9 @@ spec:
       - name: tls
         secret:
           secretName: keycloak-crt
+      - name: data
+        persistentVolumeClaim:
+          claimName: keycloak-data
 
       containers:
         - name: keycloak
@@ -39,10 +42,9 @@ spec:
           - name: tls
             mountPath: "/etc/keycloak/tls"
             readOnly: true
+          - name: data
+            mountPath: "/opt/keycloak/data/h2"
           readinessProbe:
             httpGet:
               path: /realms/master
               port: 8080
-          securityContext:
-            allowPrivilegeEscalation: false
-            runAsUser: 0
