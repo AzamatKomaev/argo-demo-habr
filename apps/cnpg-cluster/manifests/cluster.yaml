@@ -10,7 +10,7 @@ spec:
       owner: db
       secret:
         name: db-creds
-  instances: 3
+  instances: 1
   monitoring:
     enablePodMonitor: true
   storage:
